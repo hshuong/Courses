@@ -78,17 +78,19 @@ fun TopicCard(
                             bottom= dimensionResource(R.dimen.padding_small))
                 )
                 Row (
-                    
+                    verticalAlignment = Alignment.Top
                 ){
                     Icon(
                         painter = painterResource(R.drawable.ic_grain),
                         contentDescription = null,
+                        modifier = Modifier
+                            .padding(start = dimensionResource(R.dimen.padding_medium))
                     )
                     Text(
                         text = topic.number.toString(),
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier
-                            .padding(start = 8.dp)
+                            .padding(start = dimensionResource(R.dimen.padding_small))
                     )
                 }
             }
@@ -100,6 +102,11 @@ fun TopicCard(
 @Composable
 fun TopicCardPreview(){
     TopicCard(topic = Topic(R.string.photography, 58, R.drawable.photography ))
+}
+
+@Composable
+fun TopicGrid(topicList: List<Topic>, modifier: Modifier = Modifier) {
+
 }
 
 @Composable
