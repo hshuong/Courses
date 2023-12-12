@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
@@ -17,9 +18,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -54,20 +57,29 @@ fun TopicCard(
             Image(
                 painter = painterResource(topic.imageResourceId),
                 contentDescription = stringResource(topic.stringResourceName),
-                modifier = modifier
-                    .height(68.dp)
-                    .width(68.dp).aspectRatio(1f),
+                modifier = Modifier
+                    .size(68.dp),
+//                modifier = modifier
+//                    .height(68.dp)
+//                    .width(68.dp).aspectRatio(1f),
                 contentScale = ContentScale.Crop
             )
-            Column(modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom= 0.dp)) {
+            Column(
+                horizontalAlignment = Alignment.Start,
+                ) {
                 Text(
                     text = LocalContext.current.getString(topic.stringResourceName),
+                    style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier
-                        .padding(bottom = 8.dp),
-                    style = MaterialTheme.typography.bodyMedium
+                        .padding(
+                            start = dimensionResource(R.dimen.padding_medium),
+                            top = dimensionResource(R.dimen.padding_medium),
+                            end = dimensionResource(R.dimen.padding_medium),
+                            bottom= dimensionResource(R.dimen.padding_small))
                 )
-                Row {
+                Row (
+                    
+                ){
                     Icon(
                         painter = painterResource(R.drawable.ic_grain),
                         contentDescription = null,
@@ -84,7 +96,7 @@ fun TopicCard(
     }
 }
 
-@Preview
+@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun TopicCardPreview(){
     TopicCard(topic = Topic(R.string.photography, 58, R.drawable.photography ))
