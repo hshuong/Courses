@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -41,7 +43,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    TopicGrid(topicList = DataSource.topics)
+                    TopicGrid(
+                        topicList = DataSource.topics,
+                        modifier = Modifier.padding(dimensionResource(R.dimen.padding_small)))
                 }
             }
         }
@@ -109,7 +113,10 @@ fun TopicCardPreview(){
 fun TopicGrid(topicList: List<Topic>, modifier: Modifier = Modifier) {
     //LazyColumn(modifier = modifier) {
     LazyVerticalGrid (
-        columns = GridCells.Fixed(2)
+        columns = GridCells.Fixed(2),
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small)),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small)),
+        modifier = modifier
     ){
         items(topicList) {
             TopicCard(
